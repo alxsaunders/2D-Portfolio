@@ -45,7 +45,7 @@ const About = () => {
                             </div>
                         </div>
 
-                        <div className="about-details">
+                        {/* <div className="about-details">
                             <div className="detail-item">
                                 <i className="fas fa-map-marker-alt"></i>
                                 <span>{personalInfo.location}</span>
@@ -58,7 +58,7 @@ const About = () => {
                                 <i className="fas fa-phone"></i>
                                 <span>{personalInfo.phone}</span>
                             </div>
-                        </div>
+                        </div> */}
                     </motion.div>
 
                     <motion.div

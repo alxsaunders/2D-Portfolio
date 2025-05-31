@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 const Hero = () => {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [videoLoaded, setVideoLoaded] = useState(false);
+    const [videoError, setVideoError] = useState(false);
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -14,29 +15,54 @@ const Hero = () => {
             });
         };
 
-        // Try to load and play video after component mounts
-        const video = document.querySelector('.background-video');
-        if (video) {
-            video.load();
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    setVideoLoaded(true);
-                    console.log('Video playing successfully');
-                }).catch(error => {
-                    console.log('Video autoplay failed:', error);
-                });
-            }
-        }
-
         window.addEventListener('mousemove', handleMouseMove);
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
+
+    const handleVideoLoad = () => {
+        setVideoLoaded(true);
+        console.log('Video loaded successfully');
+    };
+
+    const handleVideoError = (e) => {
+        setVideoError(true);
+        console.error('Video failed to load:', e);
+        console.log('Attempted video src:', e.target.src);
+        console.log('Make sure video.mp4 exists in public/videos/ folder');
+    };
 
     return (
         <section id="home" className="hero">
             {/* Video Background */}
             <div className="video-background">
+                {!videoLoaded && !videoError && (
+                    <div className="video-fallback" style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: '#0a0a0a',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        zIndex: 1
+                    }}>
+                        <div style={{ color: '#666', fontSize: '1.2rem' }}>Loading video...</div>
+                    </div>
+                )}
+                {videoError && (
+                    <div className="video-fallback" style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: '#0a0a0a',
+                        backgroundImage: 'linear-gradient(135deg, #1e3c72 0%, #2a5298 100%)',
+                        zIndex: 1
+                    }}></div>
+                )}
                 <video
                     autoPlay
                     muted
@@ -44,17 +70,26 @@ const Hero = () => {
                     playsInline
                     preload="auto"
                     className="background-video"
-                    onLoadedData={() => {
-                        setVideoLoaded(true);
-                        console.log('Video loaded successfully');
+                    onLoadedData={handleVideoLoad}
+                    onCanPlayThrough={handleVideoLoad}
+                    onError={handleVideoError}
+                    style={{
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        minWidth: '100%',
+                        minHeight: '100%',
+                        width: 'auto',
+                        height: 'auto',
+                        transform: 'translate(-50%, -50%)',
+                        objectFit: 'cover',
+                        zIndex: 0
                     }}
-                    onError={(e) => {
-                        console.log('Video error:', e);
-                        console.log('Video src:', e.target.src);
-                    }}
-                    onCanPlay={() => console.log('Video can play')}
                 >
                     <source src="/videos/video.mp4" type="video/mp4" />
+                    <source src="/videos/video.webm" type="video/webm" />
+                    <source src="/videos/video.ogv" type="video/ogg" />
+                    Your browser does not support the video tag.
                 </video>
                 <div className="video-overlay"></div>
             </div>
