@@ -77,7 +77,10 @@ const Projects = () => {
                             onClick={() => openModal(project)}
                         >
                             <div className="project-image">
-                                <img src={project.image} alt={project.title} />
+                                <img 
+                                    src={`${process.env.PUBLIC_URL}${project.image}`} 
+                                    alt={project.title} 
+                                />
                                 <div className="project-overlay">
                                     <div className="project-icons">
                                         {project.icons.map((icon, i) => (
@@ -121,7 +124,10 @@ const Projects = () => {
                             </button>
 
                             <div className="modal-header">
-                                <img src={selectedProject.image} alt={selectedProject.title} />
+                                <img 
+                                    src={`${process.env.PUBLIC_URL}${selectedProject.image}`} 
+                                    alt={selectedProject.title} 
+                                />
                                 <div className="modal-title-section">
                                     <h2>{selectedProject.title}</h2>
                                     <p className="modal-subtitle">{selectedProject.description}</p>

@@ -33,7 +33,7 @@ const About = () => {
                                 className="profile-image-container"
                             >
                                 <img
-                                    src={personalInfo.profileImage}
+                                    src={`${process.env.PUBLIC_URL}${personalInfo.profileImage}`}
                                     alt={personalInfo.name}
                                     className="profile-image"
                                 />

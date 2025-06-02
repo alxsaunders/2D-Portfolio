@@ -91,7 +91,7 @@ const Contact = () => {
                                 LinkedIn
                             </a>
                             <a
-                                href={`${process.env.PUBLIC_URL}/images/AlexSaundersResume.pdf`}
+                                href={`${process.env.PUBLIC_URL}/AlexSaundersResume.pdf`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="social-btn"
