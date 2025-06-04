@@ -61,6 +61,45 @@ body {
   /* Made darker - was 0.3 */
   z-index: -2;
 }
+.walkthrough-btn {
+  background: #ff6b6b;
+  color: white;
+}
+
+.walkthrough-btn:hover {
+  background: #ff5252;
+}
+
+/* Enhanced modal links layout for 3 buttons */
+.modal-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Responsive design for modal buttons */
+@media (max-width: 768px) {
+  .modal-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-btn {
+    width: 200px;
+    justify-content: center;
+  }
+}
+
+/* Additional styling for better button appearance */
+.modal-btn i {
+  margin-right: 0.5rem;
+}
+
+.modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
 
 .parallax-element {
   position: absolute;

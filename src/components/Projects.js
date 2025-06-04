@@ -172,6 +172,16 @@ const Projects = () => {
                                             <i className="fas fa-external-link-alt"></i> Live Demo
                                         </a>
                                     )}
+                                    {selectedProject.walkthrough && selectedProject.walkthrough !== '#' && (
+                                        <a
+                                            href={selectedProject.walkthrough}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="modal-btn walkthrough-btn"
+                                        >
+                                            <i className="fas fa-play-circle"></i> Video Walkthrough
+                                        </a>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>
